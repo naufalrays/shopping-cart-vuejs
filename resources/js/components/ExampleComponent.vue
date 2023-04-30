@@ -20,14 +20,14 @@
                             <td>{{ allProduct.stock }}</td>
                             <td>Rp. {{ allProduct.price }}</td>
                             <td>
-                                <button class="btn btn-primary" type="submit" @click="functionAddToCart(allProduct)">
+                                <button class="btn btn-primary" type="submit" @click="functionAddToCart(allProduct)" v-if="allProduct.stock > 0">
                                     Add to cart
                                 </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <ShoppingCartComponent :shoppingCartDatas="cartProducts" @emit-click="functionAddToCart"></ShoppingCartComponent>
+                <ShoppingCartComponent :shoppingCartDatas="cartProducts" :totalPassing= "total" @emit-click="functionDelete" @emit-checkout="functionCheckout"></ShoppingCartComponent>
             </div>
         </div>
     </div>
@@ -60,6 +60,7 @@ export default {
                 },
             ],
             cartProducts: [],
+            total: 0,
             dataPass: "Data Passing 222",
             newStock: 0,
         };
@@ -80,7 +81,22 @@ export default {
                     price: allProducts.price,
                 });
             }
+            // this.cartProducts.forEach((data) => {
+            //     console.log(data.price);
+            //     this.total=data.price;
+            // },);
+            this.total += allProducts.price;
         },
+        functionDelete(index){
+            // console.log(this.cartProducts[index].price);
+            this.total = this.total - this.cartProducts[index].price;
+            this.cartProducts.splice(index,1);
+            // this.total = this.total - this.cartProducts[index].price;
+            console.log(index);
+        },
+        functionCheckout(){
+            alert(`Pay us ${this.total}`)
+        }
     },
     mounted() {
         console.log("Component mounted.");

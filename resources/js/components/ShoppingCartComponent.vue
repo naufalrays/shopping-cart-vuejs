@@ -15,15 +15,17 @@
                 <td>{{ item.stock }}</td>
                 <td>Rp. {{ item.price }}</td>
                 <td>
-                    <button class="btn btn-danger text-bg-danger" @click="$emit">Delete</button>
+                    <button class="btn btn-danger text-bg-danger" @click="functionClick(index)">Delete</button>
                 </td>
             </tr>
             <tr>
                 <th colspan="2">Total:</th>
-                <th>Rp. 15000</th>
+                <th>Rp. {{ totalPassing }}</th>
             </tr>
         </tbody>
     </table>
+    <button class="btn btn-success" @click="functionCheckout()">Checkout</button>
+
     <!-- <button class="btn btn-primary" @click="$emit('emit-click', 'Params')">Submit Button</button> -->
     <!-- <button class="btn btn-primary" @click="$emit('emit-click', listData)"></button> -->
 </template>
@@ -31,6 +33,7 @@
 <script>
 export default {
     props: {
+        totalPassing: Number,
         titlePass: String,
         shoppingCartDatas: {
             type: Array,
@@ -40,9 +43,12 @@ export default {
         },
     },
     methods: {
-        functionClick(){
-            this.$emit('emit-click')
-        }
+        functionClick(item){
+            this.$emit('emit-click', item)
+        },
+        functionCheckout(){
+            this.$emit('emit-checkout')
+        },
     }
 }
 </script>

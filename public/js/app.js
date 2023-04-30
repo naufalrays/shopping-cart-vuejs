@@ -20929,6 +20929,7 @@ __webpack_require__.r(__webpack_exports__);
         price: 10000
       }],
       cartProducts: [],
+      total: 0,
       dataPass: "Data Passing 222",
       newStock: 0
     };
@@ -20950,6 +20951,21 @@ __webpack_require__.r(__webpack_exports__);
           price: allProducts.price
         });
       }
+      // this.cartProducts.forEach((data) => {
+      //     console.log(data.price);
+      //     this.total=data.price;
+      // },);
+      this.total += allProducts.price;
+    },
+    functionDelete: function functionDelete(index) {
+      // console.log(this.cartProducts[index].price);
+      this.total = this.total - this.cartProducts[index].price;
+      this.cartProducts.splice(index, 1);
+      // this.total = this.total - this.cartProducts[index].price;
+      console.log(index);
+    },
+    functionCheckout: function functionCheckout() {
+      alert("Pay us ".concat(this.total));
     }
   },
   mounted: function mounted() {
@@ -20975,6 +20991,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
+    totalPassing: Number,
     titlePass: String,
     shoppingCartDatas: {
       type: Array,
@@ -20984,8 +21001,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    functionClick: function functionClick() {
-      this.$emit('emit-click');
+    functionClick: function functionClick(item) {
+      this.$emit('emit-click', item);
+    },
+    functionCheckout: function functionCheckout() {
+      this.$emit('emit-checkout');
     }
   }
 });
@@ -21026,17 +21046,20 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: index,
       "class": "table align-middle"
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(allProduct.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(allProduct.description), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(allProduct.stock), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, "Rp. " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(allProduct.price), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(allProduct.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(allProduct.description), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(allProduct.stock), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, "Rp. " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(allProduct.price), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [allProduct.stock > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+      key: 0,
       "class": "btn btn-primary",
       type: "submit",
       onClick: function onClick($event) {
         return $options.functionAddToCart(allProduct);
       }
-    }, " Add to cart ", 8 /* PROPS */, _hoisted_7)])]);
+    }, " Add to cart ", 8 /* PROPS */, _hoisted_7)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
   }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_ShoppingCartComponent, {
     shoppingCartDatas: _ctx.cartProducts,
-    onEmitClick: $options.functionAddToCart
-  }, null, 8 /* PROPS */, ["shoppingCartDatas", "onEmitClick"])])])]);
+    totalPassing: _ctx.total,
+    onEmitClick: $options.functionDelete,
+    onEmitCheckout: $options.functionCheckout
+  }, null, 8 /* PROPS */, ["shoppingCartDatas", "totalPassing", "onEmitClick", "onEmitCheckout"])])])]);
 }
 
 /***/ }),
@@ -21065,9 +21088,10 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 }, "Quantity"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   scope: "col"
 }, "Price"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th")])], -1 /* HOISTED */);
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
+var _hoisted_4 = ["onClick"];
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", {
   colspan: "2"
-}, "Total:"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Rp. 15000")], -1 /* HOISTED */);
+}, "Total:", -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.shoppingCartDatas, function (item, index) {
@@ -21076,11 +21100,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "table align-middle"
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.stock), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, "Rp. " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(item.price), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-danger text-bg-danger",
-      onClick: _cache[0] || (_cache[0] = function () {
-        return _ctx.$emit && _ctx.$emit.apply(_ctx, arguments);
-      })
-    }, "Delete")])]);
-  }), 128 /* KEYED_FRAGMENT */)), _hoisted_4])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button class=\"btn btn-primary\" @click=\"$emit('emit-click', 'Params')\">Submit Button</button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button class=\"btn btn-primary\" @click=\"$emit('emit-click', listData)\"></button> ")], 64 /* STABLE_FRAGMENT */);
+      onClick: function onClick($event) {
+        return $options.functionClick(index);
+      }
+    }, "Delete", 8 /* PROPS */, _hoisted_4)])]);
+  }), 128 /* KEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tr", null, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", null, "Rp. " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.totalPassing), 1 /* TEXT */)])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    "class": "btn btn-success",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.functionCheckout();
+    })
+  }, "Checkout"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button class=\"btn btn-primary\" @click=\"$emit('emit-click', 'Params')\">Submit Button</button> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <button class=\"btn btn-primary\" @click=\"$emit('emit-click', listData)\"></button> ")], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
