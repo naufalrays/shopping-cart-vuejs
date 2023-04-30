@@ -20,14 +20,16 @@
                             <td>{{ allProduct.stock }}</td>
                             <td>Rp. {{ allProduct.price }}</td>
                             <td>
-                                <button class="btn btn-primary" type="submit" @click="functionAddToCart(allProduct)" v-if="allProduct.stock > 0">
+                                <button class="btn btn-primary" type="submit" @click="functionAddToCart(allProduct)"
+                                    v-if="allProduct.stock > 0">
                                     Add to cart
                                 </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
-                <ShoppingCartComponent :shoppingCartDatas="cartProducts" :totalPassing= "total" @emit-click="functionDelete" @emit-checkout="functionCheckout"></ShoppingCartComponent>
+                <ShoppingCartComponent :shoppingCartDatas="cartProducts" :totalPassing="total" @emit-click="functionDelete"
+                    @emit-checkout="functionCheckout"></ShoppingCartComponent>
             </div>
         </div>
     </div>
@@ -81,22 +83,23 @@ export default {
                     price: allProducts.price,
                 });
             }
-            // this.cartProducts.forEach((data) => {
-            //     console.log(data.price);
-            //     this.total=data.price;
-            // },);
             this.total += allProducts.price;
         },
-        functionDelete(index){
+        functionDelete(index) {
             // console.log(this.cartProducts[index].price);
             this.total = this.total - this.cartProducts[index].price;
-            this.cartProducts.splice(index,1);
+            this.allProducts.forEach((data) => {
+                if (data.name === this.cartProducts[index].name) {
+                    data.stock += this.cartProducts[index].stock
+                };
+            },);
+            this.cartProducts.splice(index, 1);
             // this.total = this.total - this.cartProducts[index].price;
             console.log(index);
         },
-        functionCheckout(){
+        functionCheckout() {
             alert(`Pay us ${this.total}`)
-        }
+        },
     },
     mounted() {
         console.log("Component mounted.");

@@ -32,6 +32,7 @@
 
 <script>
 export default {
+    emits: ['emit-click', 'emit-checkout'],
     props: {
         totalPassing: Number,
         titlePass: String,
@@ -43,10 +44,10 @@ export default {
         },
     },
     methods: {
-        functionClick(item){
+        functionClick(item) {
             this.$emit('emit-click', item)
         },
-        functionCheckout(){
+        functionCheckout() {
             this.$emit('emit-checkout')
         },
     }

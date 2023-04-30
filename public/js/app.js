@@ -20951,15 +20951,18 @@ __webpack_require__.r(__webpack_exports__);
           price: allProducts.price
         });
       }
-      // this.cartProducts.forEach((data) => {
-      //     console.log(data.price);
-      //     this.total=data.price;
-      // },);
       this.total += allProducts.price;
     },
     functionDelete: function functionDelete(index) {
+      var _this = this;
       // console.log(this.cartProducts[index].price);
       this.total = this.total - this.cartProducts[index].price;
+      this.allProducts.forEach(function (data) {
+        if (data.name === _this.cartProducts[index].name) {
+          data.stock += _this.cartProducts[index].stock;
+        }
+        ;
+      });
       this.cartProducts.splice(index, 1);
       // this.total = this.total - this.cartProducts[index].price;
       console.log(index);
@@ -20990,6 +20993,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  emits: ['emit-click', 'emit-checkout'],
   props: {
     totalPassing: Number,
     titlePass: String,
